@@ -1,28 +1,32 @@
 package com.tt1.test;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class DBStub {
-    private List<ToDo> tareas;
-    private List<String> agendaEmails;
+    private List<ToDo> tareas = new ArrayList<>();
+    private List<String> agendaEmails = new ArrayList<>();
 
     public void insertarTarea(ToDo tarea) {
-        throw new UnsupportedOperationException("Clase aún no implementada.");
+        tareas.add(tarea);
     }
 
     public ToDo buscarTarea(String nombre) {
-        throw new UnsupportedOperationException("Clase aún no implementada.");
+        return tareas.stream()
+                .filter(t -> t.getNombre().equals(nombre))
+                .findFirst()
+                .orElse(null);
     }
 
     public List<ToDo> obtenerTodas() {
-        throw new UnsupportedOperationException("Clase aún no implementada.");
+        return new ArrayList<>(tareas);
     }
 
     public void agregarEmail(String email) {
-        throw new UnsupportedOperationException("Clase aún no implementada.");
+        agendaEmails.add(email);
     }
 
     public List<String> obtenerEmails() {
-        throw new UnsupportedOperationException("Clase aún no implementada.");
+        return new ArrayList<>(agendaEmails);
     }
 }
