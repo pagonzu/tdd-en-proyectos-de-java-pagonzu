@@ -12,27 +12,24 @@ jobs:
   test-and-promote:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout del código 
+      - name: Checkout del codigo
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
 
-      - name: Configurar JDK 21 
+      - name: Configurar JDK 21
         uses: actions/setup-java@v4
         with:
           java-version: '21'
           distribution: 'temurin'
           cache: 'maven'
 
-      - name: Ejecutar Tests 
-       
+      - name: Ejecutar Tests
         run: mvn test 
 
-      - name: Actualizar rama Early 4️⃣
+      - name: Actualizar rama Early
         if: success()
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          
-          # Forzamos que la rama 'early' se ponga al mismo nivel que el commit exitoso de 'main'
           git push origin HEAD:early --force
